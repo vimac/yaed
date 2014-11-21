@@ -30,14 +30,14 @@ ZEND_BEGIN_ARG_INFO_EX(yaed_event_get_dispatcher_info, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(yaed_event_set_dispatcher_info, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(YAED_ARGINFO_PASS_BY_REF, event, YAED\EventDispatcher, YAED_ARGINFO_NON_NULL)
+	ZEND_ARG_OBJ_INFO(YAED_ARGINFO_PASS_BY_REF, event, YAED\\EventDispatcher, YAED_ARGINFO_NON_NULL)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(yaed_event_get_name_info, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(yaed_event_set_name_info, 0, 0, 1)
-	ZEND_ARG_TYPE_INFO(YAED_ARGINFO_PASS_BY_VALUE, name, IS_STRING, YAED_ARGINFO_NON_NULL)
+	ZEND_ARG_INFO(YAED_ARGINFO_PASS_BY_VALUE, name)
 ZEND_END_ARG_INFO()
 /** }}} */
 
@@ -53,22 +53,44 @@ PHP_METHOD(yaed_event_ce, stopPropagation)
 
 PHP_METHOD(yaed_event_ce, getDispatcher)
 {
+	zval *pThis, *dispatcher;
+	pThis = getThis();
+	dispatcher = zend_read_property(yaed_event_ce, pThis, "dispatcher", strlen("dispatcher"), 1 TSRMLS_CC);
 
+	RETURN_ZVAL(dispatcher, 0, 0);
 }
 
 PHP_METHOD(yaed_event_ce, setDispatcher)
 {
+	zval *pThis, *dispatcher;
 
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "o", &dispatcher) == FAILURE) {
+		return;
+	}
+	pThis = getThis();
+	zend_update_property(yaed_event_ce, pThis, "dispatcher", strlen("dispatcher"), dispatcher);
 }
 
 PHP_METHOD(yaed_event_ce, getName)
 {
+    zval *pThis, *name;
+    pThis = getThis();
+    name = zend_read_property(yaed_event_ce, pThis, "name", strlen("name"), 1 TSRMLS_CC);
 
+    RETURN_ZVAL(name, 1, 0);
 }
 
 PHP_METHOD(yaed_event_ce, setName)
 {
+	zval *pThis;
+	char *name;
+	int nameLen;
 
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &name, &nameLen) == FAILURE) {
+		return;
+	}
+	pThis = getThis();
+	zend_update_property_stringl(yaed_event_ce, pThis, "name", strlen("name"), name, nameLen TSRMLS_CC);
 }
 
 static zend_function_entry yaed_event_functions[] = {

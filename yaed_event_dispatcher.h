@@ -11,6 +11,7 @@
 extern zend_class_entry *yaed_event_dispatcher_interface_ce;
 extern zend_class_entry *yaed_event_dispatcher_ce;
 
+PHP_METHOD(yaed_event_dispatcher_ce, __construct);
 PHP_METHOD(yaed_event_dispatcher_ce, dispatch);
 PHP_METHOD(yaed_event_dispatcher_ce, addListener);
 PHP_METHOD(yaed_event_dispatcher_ce, addSubscriber);
