@@ -33,11 +33,11 @@ extern zend_module_entry yaed_module_entry;
 
 
 #ifdef PHP_WIN32
-#	define PHP_YAED_API __declspec(dllexport)
+#define PHP_YAED_API __declspec(dllexport)
 #elif defined(__GNUC__) && __GNUC__ >= 4
-#	define PHP_YAED_API __attribute__ ((visibility("default")))
+#define PHP_YAED_API __attribute__ ((visibility("default")))
 #else
-#	define PHP_YAED_API
+#define PHP_YAED_API
 #endif
 
 #ifdef ZTS
@@ -70,15 +70,15 @@ extern zend_module_entry yaed_module_entry;
 #define YAED_G(v) (yaed_globals.v)
 #endif
 
-#define YAED_VERSION 					"0.0.1"
+#define YAED_VERSION "0.0.1"
 
-#define YAED_STARTUP_FUNCTION(module)   	ZEND_MINIT_FUNCTION(yaed_##module)
-#define YAED_RINIT_FUNCTION(module)		ZEND_RINIT_FUNCTION(yaed_##module)
-#define YAED_STARTUP(module)	 		  	ZEND_MODULE_STARTUP_N(yaed_##module)(INIT_FUNC_ARGS_PASSTHRU)
-#define YAED_SHUTDOWN_FUNCTION(module)  	ZEND_MINIT_FUNCTION(yaed_##module)
-#define YAED_SHUTDOWN(module)	 	    ZEND_MODULE_SHUTDOWN_N(yaed_##module)(INIT_FUNC_ARGS_PASSTHRU)
+#define YAED_STARTUP_FUNCTION(module)   ZEND_MINIT_FUNCTION(yaed_##module)
+#define YAED_RINIT_FUNCTION(module)ZEND_RINIT_FUNCTION(yaed_##module)
+#define YAED_STARTUP(module)   ZEND_MODULE_STARTUP_N(yaed_##module)(INIT_FUNC_ARGS_PASSTHRU)
+#define YAED_SHUTDOWN_FUNCTION(module)  ZEND_MINIT_FUNCTION(yaed_##module)
+#define YAED_SHUTDOWN(module)     ZEND_MODULE_SHUTDOWN_N(yaed_##module)(INIT_FUNC_ARGS_PASSTHRU)
 
-#endif	/* PHP_YAED_H */
+#endif /* PHP_YAED_H */
 
 /*
  * Local variables:

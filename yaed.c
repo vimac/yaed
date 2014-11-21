@@ -57,16 +57,16 @@ PHP_INI_END()
    Return a string to confirm that the module is compiled in */
 //PHP_FUNCTION(confirm_yaed_compiled)
 //{
-//	char *arg = NULL;
-//	int arg_len, len;
-//	char *strg;
+//    char *arg = NULL;
+//    int arg_len, len;
+//    char *strg;
 //
-//	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
-//		return;
-//	}
+//    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
+//        return;
+//    }
 //
-//	len = spprintf(&strg, 0, "Congratulations! You have successfully modified ext/%.78s/config.m4. Module %.78s is now compiled into PHP.", "yaed", arg);
-//	RETURN_STRINGL(strg, len, 0);
+//    len = spprintf(&strg, 0, "Congratulations! You have successfully modified ext/%.78s/config.m4. Module %.78s is now compiled into PHP.", "yaed", arg);
+//    RETURN_STRINGL(strg, len, 0);
 //}
 /* }}} */
 /* The previous line is meant for vim and emacs, so it can correctly fold and 
@@ -81,8 +81,8 @@ PHP_INI_END()
 /* Uncomment this function if you have INI entries
 static void php_yaed_init_globals(zend_yaed_globals *yaed_globals)
 {
-	yaed_globals->global_value = 0;
-	yaed_globals->global_string = NULL;
+    yaed_globals->global_value = 0;
+    yaed_globals->global_string = NULL;
 }
 */
 /* }}} */
@@ -91,14 +91,14 @@ static void php_yaed_init_globals(zend_yaed_globals *yaed_globals)
  */
 PHP_MINIT_FUNCTION(yaed)
 {
-	/* If you have INI entries, uncomment these lines 
-	REGISTER_INI_ENTRIES();
-	*/
+    /* If you have INI entries, uncomment these lines
+    REGISTER_INI_ENTRIES();
+    */
     YAED_STARTUP(event_dispatcher);
     YAED_STARTUP(event_subscriber);
     YAED_STARTUP(event);
 
-	return SUCCESS;
+    return SUCCESS;
 }
 /* }}} */
 
@@ -106,10 +106,10 @@ PHP_MINIT_FUNCTION(yaed)
  */
 PHP_MSHUTDOWN_FUNCTION(yaed)
 {
-	/* uncomment this line if you have INI entries
-	UNREGISTER_INI_ENTRIES();
-	*/
-	return SUCCESS;
+    /* uncomment this line if you have INI entries
+    UNREGISTER_INI_ENTRIES();
+    */
+    return SUCCESS;
 }
 /* }}} */
 
@@ -118,7 +118,7 @@ PHP_MSHUTDOWN_FUNCTION(yaed)
  */
 PHP_RINIT_FUNCTION(yaed)
 {
-	return SUCCESS;
+    return SUCCESS;
 }
 /* }}} */
 
@@ -127,7 +127,7 @@ PHP_RINIT_FUNCTION(yaed)
  */
 PHP_RSHUTDOWN_FUNCTION(yaed)
 {
-	return SUCCESS;
+    return SUCCESS;
 }
 /* }}} */
 
@@ -135,13 +135,13 @@ PHP_RSHUTDOWN_FUNCTION(yaed)
  */
 PHP_MINFO_FUNCTION(yaed)
 {
-	php_info_print_table_start();
-	php_info_print_table_header(2, "yaed support", "enabled");
-	php_info_print_table_end();
+    php_info_print_table_start();
+    php_info_print_table_header(2, "yaed support", "enabled");
+    php_info_print_table_end();
 
-	/* Remove comments if you have entries in php.ini
-	DISPLAY_INI_ENTRIES();
-	*/
+    /* Remove comments if you have entries in php.ini
+    DISPLAY_INI_ENTRIES();
+    */
 }
 /* }}} */
 
@@ -150,24 +150,24 @@ PHP_MINFO_FUNCTION(yaed)
  * Every user visible function must have an entry in yaed_functions[].
  */
 const zend_function_entry yaed_functions[] = {
-//	PHP_FE(confirm_yaed_compiled,	NULL)		/* For testing, remove later. */
-	PHP_FE_END	/* Must be the last line in yaed_functions[] */
+//    PHP_FE(confirm_yaed_compiled,    NULL)        /* For testing, remove later. */
+    PHP_FE_END    /* Must be the last line in yaed_functions[] */
 };
 /* }}} */
 
 /* {{{ yaed_module_entry
  */
 zend_module_entry yaed_module_entry = {
-	STANDARD_MODULE_HEADER,
-	"yaed",
-	NULL,
-	PHP_MINIT(yaed),
-	PHP_MSHUTDOWN(yaed),
-	PHP_RINIT(yaed),		/* Replace with NULL if there's nothing to do at request start */
-	PHP_RSHUTDOWN(yaed),	/* Replace with NULL if there's nothing to do at request end */
-	PHP_MINFO(yaed),
-	PHP_YAED_VERSION,
-	STANDARD_MODULE_PROPERTIES
+    STANDARD_MODULE_HEADER,
+    "yaed",
+    NULL,
+    PHP_MINIT(yaed),
+    PHP_MSHUTDOWN(yaed),
+    PHP_RINIT(yaed),        /* Replace with NULL if there's nothing to do at request start */
+    PHP_RSHUTDOWN(yaed),    /* Replace with NULL if there's nothing to do at request end */
+    PHP_MINFO(yaed),
+    PHP_YAED_VERSION,
+    STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
 
