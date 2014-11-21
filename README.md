@@ -4,6 +4,6 @@ This is a C clone PHP Extension of [Symfony Event Dispatcher Framework](https://
 
 The main purpose of this project is reinventing whells for practice
 
-And it's still under development and not ready for any enviroment
+And it's still under development and not ready for any environment
 
-Salute to YetAnotherFramework
+Salute to [YetAnotherFramework](https://github.com/laruence/php-yaf) and [Laruence](http://github.com/laruence)
