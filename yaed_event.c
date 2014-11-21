@@ -43,12 +43,17 @@ ZEND_END_ARG_INFO()
 
 PHP_METHOD(yaed_event_ce, isPropagationStopped)
 {
+    zval *pThis, *stop;
+    pThis = getThis();
+    stop = zend_read_property(yaed_event_ce, pThis, "propagationStopped", strlen("propagationStopped"), 1 TSRMLS_CC);
 
+    RETURN_ZVAL(stop, 0, 0);
 }
 
 PHP_METHOD(yaed_event_ce, stopPropagation)
 {
-
+    zval *pThis;
+    zend_update_property_bool(yaed_event_ce, getThis(), "propagationStopped", strlen("propagationStopped"), 1 TSRMLS_CC);
 }
 
 PHP_METHOD(yaed_event_ce, getDispatcher)
