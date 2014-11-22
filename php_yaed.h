@@ -31,6 +31,11 @@ extern zend_module_entry yaed_module_entry;
 #define YAED_ARGINFO_ALLOW_NULL 1
 #define YAED_ARGINFO_NON_NULL 0
 
+#define YAED_PROPERTY_LISTENERS	"listeners"
+#define YAED_PROPERTY_SORTED "sorted"
+#define YAED_PROPERTY_NAME "name"
+#define YAED_PROPERTY_DISPATCHER "dispatcher"
+#define YAED_PROPERTY_PROPAGATION_STOPPED "propagationStopped"
 
 #ifdef PHP_WIN32
 #define PHP_YAED_API __declspec(dllexport)

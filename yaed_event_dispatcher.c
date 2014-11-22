@@ -14,6 +14,7 @@
 #include "ext/standard/basic_functions.h"
 
 #include "php_yaed.h"
+#include "yaed_event.h"
 #include "yaed_event_dispatcher.h"
 
 zend_class_entry *yaed_event_dispatcher_interface_ce;
@@ -71,13 +72,27 @@ PHP_METHOD(yaed_event_dispatcher_ce, __construct) {
     MAKE_STD_ZVAL(emptyArray);
     array_init(emptyArray);
 
-    zend_update_property(yaed_event_dispatcher_ce, pThis, "listeners", strlen("listeners"), emptyArray TSRMLS_CC);
-    zend_update_property(yaed_event_dispatcher_ce, pThis, "sorted", strlen("sorted"), emptyArray TSRMLS_CC);
+    zend_update_property(yaed_event_dispatcher_ce, pThis, ZEND_STRL(YAED_PROPERTY_LISTENERS), emptyArray TSRMLS_CC);
+    zend_update_property(yaed_event_dispatcher_ce, pThis, ZEND_STRL(YAED_PROPERTY_SORTED), emptyArray TSRMLS_CC);
 
     Z_DELREF_P(emptyArray);
 }
 
 PHP_METHOD(yaed_event_dispatcher_ce, dispatch) {
+	zval *pThis, *event;
+	char *eventName;
+	unsigned int eventNameLen;
+
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|o", &eventName, &eventNameLen, &event) == FAILURE) {
+        return;
+    }
+
+    if (Z_TYPE_P(event) == IS_NULL) {
+    	object_init_ex(event, yaed_event_ce);
+    }
+
+
+
 
 }
 
@@ -128,8 +143,8 @@ YAED_STARTUP_FUNCTION(event_dispatcher){
     yaed_event_dispatcher_ce = zend_register_internal_class(&ce TSRMLS_CC);
     zend_class_implements(yaed_event_dispatcher_ce TSRMLS_CC, 1, yaed_event_dispatcher_interface_ce);
 
-    zend_declare_property_null(yaed_event_dispatcher_ce, "listeners", strlen("listeners"), ZEND_ACC_PRIVATE TSRMLS_CC);
-    zend_declare_property_null(yaed_event_dispatcher_ce, "sorted", strlen("sorted"), ZEND_ACC_PRIVATE TSRMLS_CC);
+    zend_declare_property_null(yaed_event_dispatcher_ce, ZEND_STRL(YAED_PROPERTY_LISTENERS), ZEND_ACC_PRIVATE TSRMLS_CC);
+    zend_declare_property_null(yaed_event_dispatcher_ce, ZEND_STRL(YAED_PROPERTY_SORTED), ZEND_ACC_PRIVATE TSRMLS_CC);
 
     return SUCCESS;
 }

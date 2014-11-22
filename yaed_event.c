@@ -45,7 +45,7 @@ PHP_METHOD(yaed_event_ce, isPropagationStopped)
 {
     zval *pThis, *stop;
     pThis = getThis();
-    stop = zend_read_property(yaed_event_ce, pThis, "propagationStopped", strlen("propagationStopped"), 1 TSRMLS_CC);
+    stop = zend_read_property(yaed_event_ce, pThis, ZEND_STRL(YAED_PROPERTY_PROPAGATION_STOPPED), 1 TSRMLS_CC);
 
     RETURN_ZVAL(stop, 0, 0);
 }
@@ -53,14 +53,14 @@ PHP_METHOD(yaed_event_ce, isPropagationStopped)
 PHP_METHOD(yaed_event_ce, stopPropagation)
 {
     zval *pThis;
-    zend_update_property_bool(yaed_event_ce, getThis(), "propagationStopped", strlen("propagationStopped"), 1 TSRMLS_CC);
+    zend_update_property_bool(yaed_event_ce, getThis(), ZEND_STRL(YAED_PROPERTY_PROPAGATION_STOPPED), 1 TSRMLS_CC);
 }
 
 PHP_METHOD(yaed_event_ce, getDispatcher)
 {
     zval *pThis, *dispatcher;
     pThis = getThis();
-    dispatcher = zend_read_property(yaed_event_ce, pThis, "dispatcher", strlen("dispatcher"), 1 TSRMLS_CC);
+    dispatcher = zend_read_property(yaed_event_ce, pThis, ZEND_STRL(YAED_PROPERTY_DISPATCHER), 1 TSRMLS_CC);
 
     RETURN_ZVAL(dispatcher, 0, 0);
 }
@@ -73,14 +73,14 @@ PHP_METHOD(yaed_event_ce, setDispatcher)
         return;
     }
     pThis = getThis();
-    zend_update_property(yaed_event_ce, pThis, "dispatcher", strlen("dispatcher"), dispatcher);
+    zend_update_property(yaed_event_ce, pThis, ZEND_STRL(YAED_PROPERTY_DISPATCHER), dispatcher);
 }
 
 PHP_METHOD(yaed_event_ce, getName)
 {
     zval *pThis, *name;
     pThis = getThis();
-    name = zend_read_property(yaed_event_ce, pThis, "name", strlen("name"), 1 TSRMLS_CC);
+    name = zend_read_property(yaed_event_ce, pThis, ZEND_STRL(YAED_PROPERTY_NAME), 1 TSRMLS_CC);
 
     RETURN_ZVAL(name, 1, 0);
 }
@@ -89,13 +89,13 @@ PHP_METHOD(yaed_event_ce, setName)
 {
     zval *pThis;
     char *name;
-    int nameLen;
+    unsigned int nameLen;
 
     if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &name, &nameLen) == FAILURE) {
         return;
     }
     pThis = getThis();
-    zend_update_property_stringl(yaed_event_ce, pThis, "name", strlen("name"), name, nameLen TSRMLS_CC);
+    zend_update_property_stringl(yaed_event_ce, pThis, ZEND_STRL(YAED_PROPERTY_NAME), name, nameLen TSRMLS_CC);
 }
 
 static zend_function_entry yaed_event_functions[] = {
@@ -113,9 +113,9 @@ YAED_STARTUP_FUNCTION(event) {
     INIT_CLASS_ENTRY(ce, "YAED\\Event", yaed_event_functions);
     yaed_event_ce = zend_register_internal_class(&ce TSRMLS_CC);
 
-    zend_declare_property_bool(yaed_event_ce, "dispatcher", strlen("dispatcher"), 0, ZEND_ACC_PRIVATE TSRMLS_CC);
-    zend_declare_property_null(yaed_event_ce, "name", strlen("name"), ZEND_ACC_PRIVATE TSRMLS_CC);
-    zend_declare_property_null(yaed_event_ce, "propagationStopped", strlen("propagationStopped"), ZEND_ACC_PRIVATE TSRMLS_CC);
+    zend_declare_property_bool(yaed_event_ce, ZEND_STRL(YAED_PROPERTY_PROPAGATION_STOPPED), 0, ZEND_ACC_PRIVATE TSRMLS_CC);
+    zend_declare_property_null(yaed_event_ce, ZEND_STRL(YAED_PROPERTY_NAME), ZEND_ACC_PRIVATE TSRMLS_CC);
+    zend_declare_property_null(yaed_event_ce, ZEND_STRL(YAED_PROPERTY_DISPATCHER), ZEND_ACC_PRIVATE TSRMLS_CC);
 
     return SUCCESS;
 }

@@ -6,4 +6,4 @@ The main purpose of this project is reinventing whells for practice
 
 And it's still under development and not ready for any environment
 
-Salute to [YetAnotherFramework](https://github.com/laruence/php-yaf) and [Laruence](http://github.com/laruence)
+Salute to [Laruence](http://github.com/laruence) and his great work [YetAnotherFramework](https://github.com/laruence/php-yaf)
